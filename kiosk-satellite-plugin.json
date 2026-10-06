@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "id": "music-alarm",
+  "name": "Music Alarm",
+  "version": "0.1.0",
+  "apiVersion": 1,
+  "minAndroidSdk": 24,
+  "entryClass": "com.carmisergio.kiosk.musicalarm.MusicAlarmPlugin",
+  "description": "Wake up to a random song from a Jellyfin playlist. Every night the plugin downloads a new song into the alarm sounds folder, so the alarm plays it on the alarm stream even when the network is down at ring time. Set the alarm's tone to the file name configured here.",
+  "author": "Sergio Carmi",
+  "license": "Apache-2.0",
+  "capabilities": [
+    "entities"
+  ],
+  "settings": [
+    {
+      "key": "serverUrl",
+      "type": "string",
+      "title": "Server address",
+      "default": "",
+      "group": "Jellyfin",
+      "description": "The Jellyfin server, for example http://jellyfin:8096."
+    },
+    {
+      "key": "apiKey",
+      "type": "string",
+      "title": "API key",
+      "default": "",
+      "group": "Jellyfin",
+      "description": "Create one in Jellyfin under Dashboard, API Keys. It is stored in plain text, so use a key made for this plugin."
+    },
+    {
+      "key": "user",
+      "type": "string",
+      "title": "User",
+      "default": "",
+      "group": "Jellyfin",
+      "description": "The Jellyfin user who owns the playlist, by name or ID. Playlists belong to a user, so set this if the playlist is not found."
+    },
+    {
+      "key": "playlist",
+      "type": "string",
+      "title": "Playlist",
+      "default": "",
+      "group": "Jellyfin",
+      "description": "The playlist name or its item ID."
+    },
+    {
+      "key": "fileName",
+      "type": "string",
+      "title": "Sound file name",
+      "default": "wake.mp3",
+      "group": "Song",
+      "description": "The file written to the alarm sounds folder. Pick the same name as the alarm's tone. Must end in .mp3."
+    },
+    {
+      "key": "avoidRepeats",
+      "type": "boolean",
+      "title": "Avoid repeats",
+      "default": true,
+      "group": "Song",
+      "description": "Skip the last ten songs picked when the playlist has others."
+    },
+    {
+      "key": "refreshHour",
+      "type": "number",
+      "title": "Nightly refresh hour",
+      "default": 3,
+      "min": 0,
+      "max": 23,
+      "step": 1,
+      "group": "Refresh",
+      "description": "The hour of the day, in the kiosk's time zone, when a new song is picked."
+    }
+  ],
+  "commands": [
+    {
+      "id": "refresh",
+      "title": "Pick a new song now"
+    }
+  ]
+}
